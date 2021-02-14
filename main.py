@@ -1,15 +1,15 @@
 # pygameを読み込む
 import pygame
-# sysライブラリを読み込む
+# sysライブラリを読み込む __システムライブラリ
 import sys
-# pygameのlocalsファイルにあるすべての変数、関数、クラスを読み込む
+# pygameのlocalsファイルにあるすべての変数、関数、クラスを読み込む __すべてを読み込む→インポート・アスタリスク
 from pygame.locals import *
-# GUI表示ライブラリtkinterを読み込む
+# GUI表示ライブラリtkinterを読み込む __ティーキンター
 import tkinter as tk
 # os関連の処理をするosライブラリを読み込む
 import os
 # snake.pyにあるすべての変数、関数、クラスを読み込む
-from snake2 import *
+from snake2 import * # ここは独自にsnake2としているので要注意
 # food.pyにあるすべての変数、関数、クラスを読み込む
 from food import *
 # background.pyにあるすべての変数、関数、クラスを読み込む
@@ -23,7 +23,7 @@ class Game:
 
     Game全体を管理するクラス
     """
-    # 画面の大きさ
+    # 画面の大きさ __を変数に入れる
     SIZE = WIDTH, HEIGHT = (800, 800)
 
     # 色情報をRGBで管理
@@ -34,7 +34,7 @@ class Game:
 
     # frame per second、1秒あたりのフレーム数。フレーム数が多いと滑らかになるが処理が遅くなる
     fps = 20
-    # スコア
+    # スコア __一般的にフレーム数は30だったり60だったりする。だんだん上げるため最初は20
     score = 0
 
     def __init__(self):
@@ -42,20 +42,20 @@ class Game:
         初期化関数
         """
 
-        # 謎の処理
+        # 謎の処理 __分からなかったので謎の処理・おまじないみたいなものと
         os.environ["SDL_VIDEO_WINDOW_POS"] = f'{(tk.Tk().winfo_screenwidth() - self.WIDTH) // 2},' \
         f'{(tk.Tk().winfo_screenheight() - self.HEIGHT) // 2}'
         
-        # pygame mixerの初期設定 ＊＊音声を読み込んで再生するためのpygameのモジュール
-        pygame.mixer.pre_init(44100, -16, 2, 2048)　# __mixerモジュールを初期化する引数を事前に設定
+        # pygame mixerの初期設定 ＊＊音声を読み込んで再生するためのpygameのモジュール__ミキサー：音の処理 BGMあたり
+        pygame.mixer.pre_init(44100, -16, 2, 2048) # __mixerモジュールを初期化する引数を事前に設定__ミキサー.イニットで初期化する
         pygame.mixer.init()　# __mixerモジュールを初期化
-        # pygameの初期化
+        # pygameの初期化 __pygameの初期化も行う
         pygame.init()
-        # MIDファイルのロード
+        # MIDファイルのロード ミディファイル：音楽ファイル
         pygame.mixer.music.load("System/Sounds/music.mid")
         # 音楽を再生
         pygame.mixer.music.play(9)
-        # ゲーム表示画面のキャプション名を設定
+        # ゲーム表示画面のキャプション名を設定 __ゲーム実行した時に一番上に現れる表示
         pygame.display.set_caption("Snake")
 
         # 効果音「ゲームオーバー」を変数に設定 __Soundはクラスの模様
@@ -64,7 +64,7 @@ class Game:
         self.sound_eat_food = pygame.mixer.Sound("System/Sounds/eat_food.wav")
         # 画像を描写するために使用するSurfaceクラスからインスタンスを生成
         self.surf = pygame.display.set_mode(self.SIZE) #__インスタンス化：クラスを使えるような状態にすること。基本は『インスタンス名＝クラス名（実引数１，実引数２…）』
-        # 時間の設定
+        # 時間の設定 __クロック関数を用いて
         self.clock = pygame.time.Clock()
 
         # 背景のインスタンスを生成
@@ -78,9 +78,9 @@ class Game:
         # foodのインスタンスを生成
         self.food = Food(self.surf)
 
-        # スコア表示のフォント
+        # スコア表示のフォント __文字のデザイン。その基準となるフォントを設定
         self.font_score = pygame.font.Font(None, 22)
-        # 終了表示のフォント
+        # 終了表示のフォント __フォントの第２引数はフォントの大きさ
         self.font_end = pygame.font.Font(None, 48)
         # ボタンのフォント
         self.font_button = pygame.font.Font(None, 30)
@@ -105,8 +105,8 @@ class Game:
 
             # キーを押したことを判定 __フォントを13から12に変更
             keys = pygame.key.get_pressed()
-            
-            # 左またはaを押した __snakeの動き方をここで定義
+            # 以下スネークの動き方をここで定義している
+            # 左またはaを押した __進行方向右でなかったら進行方向左にする
             if keys[K_LEFT] or keys[K_a]:
                 # 進行方向が右ではない __進行方向が右でなかったら右にする。
                 if self.snake.direction != "r": # __!=(ノットイコール)比較演算子
@@ -131,13 +131,13 @@ class Game:
                     # 進行方向が下に設定
                     self.snake.direction = "d"
 
-            # foodがsnakeに食べられた
+            # foodがsnakeに食べられた__時の処理
             if self.food.is_eaten(self.snake.x, self.snake.y, self.snake.SIDE):
                 # foodを食べる効果音を再生
                 self.sound_eat_food.play()
                 # snakeの長さが伸びる
                 self.snake.add_length() #__実は元のGitHubは綴りが間違っている。
-                # effectのトリガーがTrue
+                # effectのトリガーがTrue__になって破片のようなエフェクトが出る7:47
                 self.effect_trigger = True
                 # 新しいfoodを配置
                 self.food.new_foodxy(self.snake.SIDE)
@@ -172,7 +172,7 @@ class Game:
         
         # effectを実行
         self.effect.run(self.effect_trigger, self.snake.x, self.snake.y)
-        # effectトリガーをFalse
+        # effectトリガーをFalse __に戻します
         self.effect_trigger = False
 
         # pygameのディスプレイをupdate
@@ -189,7 +189,7 @@ class Game:
         # 効果音「ゲームオーバー」を再生
         self.sound_game_over.play()
 
-        # 次の処理をするまで実行し続ける
+        # 次の処理をするまで実行し続ける __終了時はYOUR SCORE:○○表示とリトライボタンを設定
         while True:
             # スコアの結果を表示 __fストリングスは()
             self.surf.blit(self.font_end.render(f'YOUR SCORE:{self.score}', 1, (255, 165, 0)), (self.WIDTH // 2 -130, self.HEIGHT // 3))
@@ -199,14 +199,14 @@ class Game:
             # mouseのクリックイベント
             mouse_events = pygame.mouse.get_pressed()
 
-
-            # RETRYボタンにマウスホバーすると色が変わる __途中からはGitHubからコピー
+            # マウスポインタの位置を取得しこのエリアに入ったら赤色を緑に変えるという処理
+            # RETRYボタンにマウスホバーすると色が変わる __赤から緑に__途中からはGitHubからコピー
             if self.WIDTH // 2 - 50 < mouse_coord[0] < self.WIDTH // 2 + 50 and \
             self.HEIGHT // 2 - 50 < mouse_coord[1] < self.HEIGHT // 2 -10:
                 # 緑の長方形を描画
                 pygame.draw.rect(self.surf, self.GREEN, (self.WIDTH // 2 - 50, self.HEIGHT // 2 - 50, 100 ,40))
                 if mouse_events[0]:
-                    # RETRYボタン領域をクリック
+                    # RETRYボタン領域をクリック __するとこのホワイル文を抜ける。そしてブレイクする。
                     break
             else:
                 # 赤の長方形を描画
@@ -225,7 +225,7 @@ class Game:
                 if event.type == QUIT:
                     pygame.quit()
                     sys.exit()
-        
+        # ホワイル文を抜けると↓
         # Gameクラスを初期化してリトライ
         Game()
 
