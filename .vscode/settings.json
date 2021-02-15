@@ -1,5 +1,6 @@
 {
     "cSpell.words": [
         "pygame"
-    ]
+    ],
+    "python.pythonPath": "/Users/moonlight/opt/anaconda3/bin/python"
 }

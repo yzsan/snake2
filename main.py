@@ -1,4 +1,5 @@
-# pygameを読み込む
+# -*- coding: utf-8 -*-
+# pygameを読み込む　＠＠＠上の1行はエラー対応①
 import pygame
 # sysライブラリを読み込む __システムライブラリ
 import sys
@@ -42,14 +43,13 @@ class Game:
         初期化関数
         """
 
-        # 謎の処理 __分からなかったので謎の処理・おまじないみたいなものと
-        os.environ["SDL_VIDEO_WINDOW_POS"] = f'{(tk.Tk().winfo_screenwidth() - self.WIDTH) // 2},' \
-        f'{(tk.Tk().winfo_screenheight() - self.HEIGHT) // 2}'
+        # 謎の処理 __分からなかったので謎の処理・おまじないみたいなものと　＠＠＠エラー②対応とった
+        
         
         # pygame mixerの初期設定 ＊＊音声を読み込んで再生するためのpygameのモジュール__ミキサー：音の処理 BGMあたり
         pygame.mixer.pre_init(44100, -16, 2, 2048) # __mixerモジュールを初期化する引数を事前に設定__ミキサー.イニットで初期化する
-        pygame.mixer.init()　# __mixerモジュールを初期化
-        # pygameの初期化 __pygameの初期化も行う
+        pygame.mixer.init()
+        # pygameの初期化 __pygameの初期化も行う　＠＠＠エラー対応③上のコメントとった
         pygame.init()
         # MIDファイルのロード ミディファイル：音楽ファイル
         pygame.mixer.music.load("System/Sounds/music.mid")
@@ -159,8 +159,8 @@ class Game:
         """
         # 画面を黒に描画して初期化
         self.surf.fill(self.BLACK) #shoではwindow.fill((0, 0, 0))
-        # スコア表示
-        self.surf.blit(self.font_score.render(f'SCORE:{self.score}', 1 , (255, 165, 0)), (self.WIDTH - -90, 5))
+        # スコア表示　＠＠＠エラー対応④次の文はコメントで回避（fストリングスが。。）
+        # self.surf.blit(self.font_score.render(f'SCORE:{self.score}', 1 , (255, 165, 0)), (self.WIDTH - -90, 5))
 
         # 背景を描画
         self.bg.draw(self.snake.direction)
@@ -191,8 +191,8 @@ class Game:
 
         # 次の処理をするまで実行し続ける __終了時はYOUR SCORE:○○表示とリトライボタンを設定
         while True:
-            # スコアの結果を表示 __fストリングスは()
-            self.surf.blit(self.font_end.render(f'YOUR SCORE:{self.score}', 1, (255, 165, 0)), (self.WIDTH // 2 -130, self.HEIGHT // 3))
+            # スコアの結果を表示 __fストリングスは()　＠＠＠エラー対応⑤次の文はコメントで回避（fストリングスが。。）
+            # self.surf.blit(self.font_end.render(f'YOUR SCORE:{self.score}', 1, (255, 165, 0)), (self.WIDTH // 2 -130, self.HEIGHT // 3))
 
             # mouseのポインタ位置
             mouse_coord = pygame.mouse.get_pos()
