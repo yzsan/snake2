@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# pygameを読み込む　＠＠＠上の1行はエラー対応①
+# pygameを読み込む　＠＠＠上の1行はエラー対応① ＠＠＠エラー対応ImportError: No module named pygame >>>>> python3.8 main.pyでクリア
 import pygame
 # sysライブラリを読み込む __システムライブラリ
 import sys
