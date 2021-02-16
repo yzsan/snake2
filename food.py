@@ -35,9 +35,9 @@ class Food:
         # foodを描画 __pygame.draw.rect:四角形を描写:(Surface, color, Rect(:＊＊left, top, width, height＊＊), width=0)
         pygame.draw.rect(self.surface, self.COLOR, (self.x, self.y, self.SIDE, self.SIDE))
         # foodのx軸方向の領域。setで管理
-        self.set_x = set(range(self.x, self_x + self.SIDE + 1))
+        self.set_x = set(range(self.x, self.x + self.SIDE + 1))
         # foodのy軸方向の領域。setで管理/__setというのは「集合」のこと
-        self.set_y = set(range(self.y, self_y + self.SIDE))
+        self.set_y = set(range(self.y, self.y + self.SIDE))
 
     def new_foodxy(self, snake_side):
         """

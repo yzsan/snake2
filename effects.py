@@ -25,7 +25,7 @@ class Effect:
         # surfaceクラスのインスタンス __を取得
         self.surf = surf
 
-    def run(self, tigger, x, y):
+    def run(self, trigger, x, y):
         # effectトリガーがTrueなら以下を実行
         if trigger:
             self.color = 255

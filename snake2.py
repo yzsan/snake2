@@ -1,7 +1,7 @@
 # pygameを読み込む
 import pygame
 
-class snake:
+class Snake:
     """
     Snakeクラス
     """
